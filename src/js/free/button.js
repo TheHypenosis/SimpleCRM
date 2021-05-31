@@ -1,10 +1,10 @@
-import { getjQuery, onDOMContentLoaded } from 'mdb/util/index';
-import Data from 'mdb/dom/data';
-import EventHandler from 'mdb/dom/event-handler';
-import Manipulator from 'mdb/dom/manipulator';
-import SelectorEngine from 'mdb/dom/selector-engine';
+import { getjQuery, onDOMContentLoaded } from '../mdb/util/index';
+import Data from '../mdb/dom/data';
+import EventHandler from '../mdb/dom/event-handler';
+import Manipulator from '../mdb/dom/manipulator';
+import SelectorEngine from '../mdb/dom/selector-engine';
 
-import BSButton from 'bootstrap/mdb-prefix/button';
+import BSButton from '../bootstrap/mdb-prefix/button';
 
 const NAME = 'button';
 const DATA_KEY = `mdb.${NAME}`;

@@ -9,8 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/mdb.min.css" type="text/css">
-    <script src="js/button.js"></script>
-    <script src="js/dropdown.js"></script>
+    <script src="js/mdb.min.js"></script>
 </head>
 <body>
     
@@ -50,28 +49,27 @@ require ('Components/Navbar.php');
                         echo $row_team ;
                     }
 
-                    echo '</td><td>'. $row['location'] . '</td><td> <button class="btn">Manage</button>' ;
+                    echo '</td><td>'. $row['location'] . '</td><td> <div class="dropdown">
+                    <button
+                      class="btn btn-primary dropdown-toggle"
+                      type="button"
+                      id="dropdownMenuButton"
+                      data-mdb-toggle="dropdown"
+                      aria-expanded="false"
+                    >
+                      Dropdown button
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                      <li><a class="dropdown-item" href="#">Action</a></li>
+                      <li><a class="dropdown-item" href="#">Another action</a></li>
+                      <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                  </div>' ;
                 }
                 $conn->close();
             ?>
         </tbody>
     </table>
-    <div class="dropdown">
-  <button
-    class="btn btn-primary dropdown-toggle"
-    type="button"
-    id="dropdownMenuButton"
-    data-mdb-toggle="dropdown"
-    aria-expanded="false"
-  >
-    Dropdown button
-  </button>
-  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-    <li><a class="dropdown-item" href="#">Action</a></li>
-    <li><a class="dropdown-item" href="#">Another action</a></li>
-    <li><a class="dropdown-item" href="#">Something else here</a></li>
-  </ul>
-</div>
 </div>
 <!-- Main Panel -->
 <!-- <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->

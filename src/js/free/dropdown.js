@@ -1,8 +1,8 @@
-import { getjQuery, typeCheckConfig, onDOMContentLoaded } from 'mdb/util/index';
-import EventHandler from 'mdb/dom/event-handler';
-import SelectorEngine from 'mdb/dom/selector-engine';
-import Manipulator from 'mdb/dom/manipulator';
-import BSDropdown from 'bootstrap/mdb-prefix/dropdown';
+import { getjQuery, typeCheckConfig, onDOMContentLoaded } from '../mdb/util/index';
+import EventHandler from '../mdb/dom/event-handler';
+import SelectorEngine from '../mdb/dom/selector-engine';
+import Manipulator from '../mdb/dom/manipulator';
+import BSDropdown from '../bootstrap/mdb-prefix/dropdown';
 
 /**
  * ------------------------------------------------------------------------
