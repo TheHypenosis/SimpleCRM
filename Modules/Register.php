@@ -14,16 +14,21 @@ if(isset($_POST['phone'])) {
 if(isset($_POST['passw'])) {
     $passw= $_POST['passw'];
 }
+
 require('db.php');
 
-$conn=new mysqli($servername, $username, $password, $dbname);
-if($conn->connect_error) {
-    die('Oops! Something went wrong: ' . $conn->connect_error);
-}
+$ID =substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstvwxyz', 36)), 0, 10);
 
-$sql= "INSERT INTO clients (name, surname, Email, phone_number, password) VALUES ('$name', '$surname', '$email', '$phone', '$passw')";
+
+$sql= "INSERT INTO clients (ID, name, surname, Email, phone_number, password) VALUES ('$ID', '$name', '$surname', '$email', '$phone', '$passw')";
+
+if ($conn->query($sql)===TRUE) {
+    header('Location:./Dashboard.html');
+}else{
+    echo 'Error ' . $sql . '<br>' . $conn->error;
+}
 
 $conn->close();
 
-header('Location: ./Dashboard.html');
+
 ?>
