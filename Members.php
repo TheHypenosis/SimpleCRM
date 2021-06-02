@@ -43,7 +43,7 @@ require ('Components/Navbar.php');
                 while ($row = $result->fetch_assoc()) {
                     echo '<tr><td>' . $i++ . '</td><td>' . $row['name'] . ' ' . $row['surname'] . '</td><td>' . $row['Email'] . '</td><td>' . $row['role'] . '</td><td>';
                     $id = $row['ID'];
-                    $sql_team = "SELECT name FROM Teams WHERE id = '$id'";
+                    $sql_team = "SELECT ID FROM Teams WHERE id = '$id'";
                     $result_team = $conn->query($sql_team);
                     while($row_team = $result_team->fetch_assoc()) {
                         echo $row_team ;
