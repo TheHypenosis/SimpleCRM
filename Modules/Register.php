@@ -23,7 +23,7 @@ $ID =substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstvwxyz', 36)), 
 $sql= "INSERT INTO clients (ID, name, surname, Email, phone_number, password) VALUES ('$ID', '$name', '$surname', '$email', '$phone', '$passw')";
 
 if ($conn->query($sql)===TRUE) {
-    header('Location:./Dashboard.html');
+    header('Location:../Dashboard.php');
 }else{
     echo 'Error ' . $sql . '<br>' . $conn->error;
 }
