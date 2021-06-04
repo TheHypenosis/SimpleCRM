@@ -21,7 +21,7 @@ require ('Components/Navbar.php');
 <div class="container-fluid">
     <form action="Modules/Tcreate.php" method="POST">
         <label class="form-label" for="form1">Project</label>
-        <select class="form-control">
+        <select class="form-control" name='project'>
             <option selected>Choose project ...</option>
                 <?php
                     require ('Modules/db.php');
@@ -45,13 +45,13 @@ while($f<'5') {
             $f .
         '</div>
         <div class="col-4">
-            <select class="form-control" name="person '. $f .'">';
+            <select class="form-control" name="person'. $f .'">';
                 
                 $o = 1;
                 $sql_name = 'SELECT * FROM clients';
                 $result = $conn->query($sql_name);
                     while($row =$result->fetch_assoc()) {
-                        echo '<option  value="' . $o++ .'">' . $row['name'] . ' ' . $row['surname'] . '</option>';
+                        echo '<option  value="' . $row['ID']  .'">' . $row['name'] . ' ' . $row['surname'] . '</option>';
                         
                     }
                 
@@ -66,6 +66,7 @@ while($f<'5') {
         </div>
     </div>';
 }
+$conn->close();
     ?>
 
 <button type="submit" class="btn btn-secondary">Submit</button>
