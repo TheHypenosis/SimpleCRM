@@ -34,22 +34,41 @@ require ('Components/Navbar.php');
                 
                 ?>
         </select>
-    <div class="row">
 
     </div>
-        <?php
+    <?php
+    $f = 0;
+while($f<'5') {
+    $f++;
+    echo '<div class="row mb-2">
+        <div class="col-1 ms-5">' .
+            $f .
+        '</div>
+        <div class="col-4">
+            <select class="form-control" name="person '. $f .'">';
+                
+                $o = 1;
+                $sql_name = 'SELECT * FROM clients';
+                $result = $conn->query($sql_name);
+                    while($row =$result->fetch_assoc()) {
+                        echo '<option  value="' . $o++ .'">' . $row['name'] . ' ' . $row['surname'] . '</option>';
+                        
+                    }
+                
+            echo '</select>
+        </div>
+        <div class="col-4"><select name="Role'.$f.'" class="form-control">
+            <option value="Role1">Role1</option>
+            <option value="Role2">Role2</option>
+            <option value="Role3">Role3</option>
+            <option value="Role4">Role4</option>
+            <option value="Role5">Role5</option></select>
+        </div>
+    </div>';
+}
+    ?>
 
-        $o = 1;
-
-        $sql_name = '';
-
-        $sql_role = '';
-
-        $result = $conn->query($sql_name);
-
-        $result_role = $conn->query($sql_role);
-
-        ?>
+<button type="submit" class="btn btn-secondary">Submit</button>
     </form>
 </div>
 
