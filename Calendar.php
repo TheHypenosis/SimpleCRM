@@ -9,6 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/mdb.min.css" type="text/css">
+    <script src="js/mdb.min.js"></script>
 </head>
 <body>
     
