@@ -23,6 +23,7 @@ require ('Components/Navbar.php');
         <label class="form-label" for="form1">Project</label>
         <select class="form-control" name='project'>
             <option selected>Choose project ...</option>
+            <option value="NULL">None</option>
                 <?php
                     require ('Modules/db.php');
 
@@ -45,8 +46,9 @@ while($f<'5') {
             $f .
         '</div>
         <div class="col-4">
-            <select class="form-control" name="person'. $f .'">';
-                
+            <select class="form-control" name="person'. $f .'">
+            <option selected>Choose a person ...</option>';
+            
                 $o = 1;
                 $sql_name = 'SELECT * FROM clients';
                 $result = $conn->query($sql_name);
@@ -58,6 +60,7 @@ while($f<'5') {
             echo '</select>
         </div>
         <div class="col-4"><select name="Role'.$f.'" class="form-control">
+            <option selected>Choose a role ...</option>
             <option value="Role1">Role1</option>
             <option value="Role2">Role2</option>
             <option value="Role3">Role3</option>
