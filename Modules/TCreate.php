@@ -63,6 +63,6 @@ while($f<5) {
     }
 }
 
-
+header('Location:../Teams.php');
 $conn->close();
 ?>
