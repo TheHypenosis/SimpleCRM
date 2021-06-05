@@ -41,30 +41,29 @@ require ('Components/Navbar.php');
                 $result = $conn->query($sql);
 
                 while ($row = $result->fetch_assoc()) {
-                    echo '<tr><td>' . $i++ . '</td><td>' . $row['name'] . ' ' . $row['surname'] . '</td><td>' . $row['Email'] . '</td><td>' . $row['role'] . '</td><td>';
-                    $id = $row['ID'];
-                    $sql_team = "SELECT ID FROM Teams WHERE id = '$id'";
-                    $result_team = $conn->query($sql_team);
-                    while($row_team = $result_team->fetch_assoc()) {
-                        echo $row_team ;
-                    }
-
-                    echo '</td><td>'. $row['location'] . '</td><td> <div class="dropdown">
-                    <button
-                      class="btn btn-primary dropdown-toggle"
-                      type="button"
-                      id="dropdownMenuButton"
-                      data-mdb-toggle="dropdown"
-                      aria-expanded="false"
-                    >
-                      Manage
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                      <li><a class="dropdown-item" href="#">Action</a></li>
-                      <li><a class="dropdown-item" href="#">Another action</a></li>
-                      <li><a class="dropdown-item" href="#">Something else here</a></li>
-                    </ul>
-                  </div>' ;
+                    echo '<tr>
+                            <td>' . $i++ . '</td>
+                            <td>' . $row['name'] . ' ' . $row['surname'] . '</td>
+                            <td>' . $row['Email'] . '</td>
+                            <td>' . $row['role'] . '</td>
+                            <td>' . $row['team_id'] . '</td>
+                            <td>' . $row['location'] . '</td>
+                            <td> <div class="dropdown">
+                              <button
+                                class="btn btn-primary dropdown-toggle"
+                                type="button"
+                                id="dropdownMenuButton"
+                                data-mdb-toggle="dropdown"
+                                aria-expanded="false"
+                              >
+                                Manage
+                              </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                              <li><a class="dropdown-item" href="#">Action</a></li>
+                              <li><a class="dropdown-item" href="#">Another action</a></li>
+                              <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                            </div></td></tr>' ;
                 }
                 $conn->close();
             ?>
@@ -86,7 +85,7 @@ function myFunction() {
 
   // Loop through all table rows, and hide those who don't match the search query
   for (i = 0; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[1,2,3,4,5];
+    td = tr[i].getElementsByTagName("td")[1];
     if (td) {
       txtValue = td.textContent || td.innerText;
       if (txtValue.toUpperCase().indexOf(filter) > -1) {
