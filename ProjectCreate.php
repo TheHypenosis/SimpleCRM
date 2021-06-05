@@ -20,8 +20,13 @@ require ('Components/Navbar.php');
 <!-- Main Panel -->
 <div class="container-fluid">
     <form action="Modules/Pcreate.php" method="POST">
-        
-<button type="submit" class="btn btn-secondary">Submit</button>
+        <input type="text" id="form1" class="form-control" name="pname"/>
+        <label class="form-label" for="form1">Project Name</label>
+        <input type="text" id="form2" class="form-control" name="deadline" placeholder="yyyy-mm-dd"/>
+        <label class="form-label" for="form2">Deadline</label>
+        <textarea class="form-control" id="textAreaExample" rows="4" name="desc"></textarea>
+        <label class="form-label" for="textAreaExample">Description</label><br>
+        <button type="submit" class="btn btn-secondary">Submit</button>
     </form>
 </div>
 
