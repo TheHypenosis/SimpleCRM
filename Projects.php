@@ -46,7 +46,15 @@ require ('Components/Navbar.php');
                 $result = $conn->query($sql);
 
                 while ($row = $result->fetch_assoc()) {
-                    echo '<tr><td>' . $i++ . '</td><td>' . $row['ID'] . '</td><td> ' . $row['Name'] . '</td><td>' . $row['start_date'] . '</td><td>' . $row['end_date'] . '</td><td>' . $row['team_id'] . '</td></tr>';
+                    echo '<tr><td>' . $i++ . '</td>
+                          <td>' . $row['ID'] . '</td>
+                          <td>
+                            <form action="Project.php" method="POST">
+                              <button class="btn btn-link btn-outline-info" type="submit" name="project" value="'.$row['Name'].'">' . $row['Name'] . '</button>
+                            </form></td>
+                          <td>' . $row['start_date'] . '</td>
+                          <td>' . $row['end_date'] . '</td>
+                          <td>' . $row['team_id'] . '</td></tr>';
                 }
                 $conn->close();
             ?>
@@ -60,6 +68,7 @@ require ('Components/Navbar.php');
 <!-- Script -->
 
 <script>
+
 // Search Bar
 
 function myFunction() {
