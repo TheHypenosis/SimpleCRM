@@ -46,7 +46,6 @@ $project = $_SESSION['project'];
                         }
                         echo '<p class="card-text">' . $desc . '</p>';
                         echo '<p class="card-text">' . $team_id . '</p>';
-                        echo $_SESSION['project'];
                         $stmt->close();
                         
                     ?>
@@ -57,7 +56,7 @@ $project = $_SESSION['project'];
         <div class="card col-4 m-3">
             <div class="card-body">
             <div class="row mb-3">
-                <h5 class="card-title col-10">Tasks</h5><button class="btn btn-secondary btn-sm col-2"><i class="fas fa-plus"></i></i></button></div>
+                <h5 class="card-title col-10">Tasks</h5><form method="POST" action="Modules/ProjectAdd.php"><button type="submit" name="Add" value="Tasks" class="btn btn-secondary btn-sm col-2"><i class="fas fa-plus"></i></i></button></form></div>
                 <?php
                     $stmt=$conn->prepare('SELECT * FROM tasks WHERE project_id=?');
                     $stmt->bind_param('s', $id);
@@ -102,7 +101,7 @@ $project = $_SESSION['project'];
         <div class="card col-3 m-3">
             <div class="card-body">
             <div class="row mb-3">
-                <h5 class="card-title col-10">Task List</h5><button class="btn btn-secondary btn-sm col-2"><i class="fas fa-plus"></i></i></button></div>
+                <h5 class="card-title col-10">Task List</h5><form method="POST" action="Modules/ProjectAdd.php"><button type="submit" name="Add" value="Task_List" class="btn btn-secondary btn-sm col-2"><i class="fas fa-plus"></i></i></button></form></div>
                 <?php
                     $stmt=$conn->prepare('SELECT * FROM tasks WHERE User_id = ?');
                     $stmt->bind_param('s', $_SESSION['ID']);
@@ -137,10 +136,23 @@ $project = $_SESSION['project'];
                                 </div>
                                 </div>
                             </div>
-                            <form method="POST" action="Project.php" class="col-1 mt-3"><button type="submit" class="btn btn-outline-danger btn-floating btn-sm" value="'. $row['ID'] .' "><i class="fas fa-minus"></i></button></form></div>';
+                            <form method="POST" action="Project.php" class="col-1 mt-3">
+                                <button type="submit" class="btn btn-outline-danger btn-floating btn-sm" name="deltask" value="'. $row['ID'] .' ">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                            </form></div>';
                     }
                     echo '</div>';
                     $stmt->close();
+                    if(isset($_POST['deltask'])) {
+                        $set_id = $_POST['deltask'];
+                        $stmt=$conn->prepare('DELETE FROM tasks WHERE ID = ?;');
+                        $stmt->bind_param('s', $set_id);
+                        $stmt->execute();
+                        $stmt->close();
+                        unset($set_id);
+                        unset($_POST['deltask']);
+                    }
 
                 ?>
             </div>
@@ -150,7 +162,7 @@ $project = $_SESSION['project'];
         <div class="card col-2 m-3">
             <div class="card-body">
                 <div class="row mb-2">
-                <h5 class="card-title col-8">Notes</h5><button class="btn btn-secondary btn-sm col-3"><i class="fas fa-plus"></i></button></div>
+                <h5 class="card-title col-8">Notes</h5><form method="POST" action="Modules/ProjectAdd.php"><button type="submit" name="Add" value="Notes" class="btn btn-secondary btn-sm col-3"><i class="fas fa-plus"></i></button></form></div>
                 <?php
                     $stmt=$conn->prepare('SELECT * FROM notes WHERE user_id = ?');
                     $stmt->bind_param('s', $_SESSION['ID']);
@@ -160,12 +172,25 @@ $project = $_SESSION['project'];
                     while ($row = $result->fetch_assoc()) {
                        
                             echo '<li class="list-group-item">
-                            '. $row['note'].'<button class="btn btn-outline-danger btn-floating btn-sm" ><i class="fas fa-minus"></i></button>
+                            '. $row['note'].
+                            '<form method="POST" action="Project.php" class="col-1 mt-3">
+                            <button type="submit" class="btn btn-outline-danger btn-floating btn-sm" name="delnote" value="'. $row['ID'] .' ">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                        </form>
                         </li>';
                     }
                     echo '</ul>';
                     $stmt->close();
-
+                    if(isset($_POST['delnote'])) {
+                        $note_id = $_POST['delnote'];
+                        $stmt=$conn->prepare('DELETE FROM notes WHERE ID = ?;');
+                        $stmt->bind_param('s', $note_id);
+                        $stmt->execute();
+                        $stmt->close();
+                        unset($note_id);
+                        unset($_POST['delnote']);
+                    }
                 ?>
             </div>
         </div>
