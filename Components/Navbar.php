@@ -24,9 +24,6 @@ $selected = $x['filename'] ;
           <a class="nav-link <?php if ($selected == "Teams") echo 'active'; ?>" href="Teams.php">Teams</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link <?php if ($selected == "Calendar") echo 'active'; ?>" href="Calendar.php">Calendar</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link <?php if ($selected == "Members") echo 'active'; ?>" href="Members.php">Members</a>
         </li>
     </ul>
@@ -68,13 +65,7 @@ $selected = $x['filename'] ;
           data-mdb-toggle="dropdown"
           aria-expanded="false"
         >
-          <img
-            src="https://mdbootstrap.com/img/Photos/Avatars/img (31).jpg"
-            class="rounded-circle"
-            height="22"
-            alt=""
-            loading="lazy"
-          />
+        <i height="22" class="fas fa-user-alt"></i>
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
           <li>
