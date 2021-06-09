@@ -10,6 +10,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="css/mdb.min.css" type="text/css">
     <script src="js/mdb.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
 </head>
 <body>
     
