@@ -56,7 +56,7 @@ $project = $_SESSION['project'];
         <div class="card col-4 m-3">
             <div class="card-body">
             <div class="row mb-3">
-                <h5 class="card-title col-10">Tasks</h5><form method="POST" action="Modules/ProjectAdd.php"><button type="submit" name="Add" value="Tasks" class="btn btn-secondary btn-sm col-2"><i class="fas fa-plus"></i></i></button></form></div>
+                <h5 class="card-title col-10">Tasks</h5><form method="POST" action="Create.php"><button type="submit" name="Add" value="Tasks" class="btn btn-secondary btn-sm col-2"><i class="fas fa-plus"></i></i></button></form></div>
                 <?php
                     $stmt=$conn->prepare('SELECT * FROM tasks WHERE project_id=?');
                     $stmt->bind_param('s', $id);
@@ -101,7 +101,7 @@ $project = $_SESSION['project'];
         <div class="card col-3 m-3">
             <div class="card-body">
             <div class="row mb-3">
-                <h5 class="card-title col-10">Task List</h5><form method="POST" action="Modules/ProjectAdd.php"><button type="submit" name="Add" value="Task_List" class="btn btn-secondary btn-sm col-2"><i class="fas fa-plus"></i></i></button></form></div>
+                <h5 class="card-title col-10">Task List</h5><form method="POST" action="Create.php"><button type="submit" name="Add" value="Task_List" class="btn btn-secondary btn-sm col-2"><i class="fas fa-plus"></i></i></button></form></div>
                 <?php
                     $stmt=$conn->prepare('SELECT * FROM tasks WHERE User_id = ?');
                     $stmt->bind_param('s', $_SESSION['ID']);
@@ -152,6 +152,7 @@ $project = $_SESSION['project'];
                         $stmt->close();
                         unset($set_id);
                         unset($_POST['deltask']);
+                        echo "<meta http-equiv='refresh' content='0'>";
                     }
 
                 ?>
@@ -162,7 +163,7 @@ $project = $_SESSION['project'];
         <div class="card col-2 m-3">
             <div class="card-body">
                 <div class="row mb-2">
-                <h5 class="card-title col-8">Notes</h5><form method="POST" action="Modules/ProjectAdd.php"><button type="submit" name="Add" value="Notes" class="btn btn-secondary btn-sm col-3"><i class="fas fa-plus"></i></button></form></div>
+                <h5 class="card-title col-8">Notes</h5><form method="POST" action="Create.php"><button type="submit" name="Add" value="Notes" class="btn btn-secondary btn-sm col-3"><i class="fas fa-plus"></i></button></form></div>
                 <?php
                     $stmt=$conn->prepare('SELECT * FROM notes WHERE user_id = ?');
                     $stmt->bind_param('s', $_SESSION['ID']);
@@ -190,6 +191,7 @@ $project = $_SESSION['project'];
                         $stmt->close();
                         unset($note_id);
                         unset($_POST['delnote']);
+                        echo "<meta http-equiv='refresh' content='0'>";
                     }
                 ?>
             </div>
