@@ -199,19 +199,18 @@ $project = $_SESSION['project'];
         <div class="card col-5 m-3">
             <div class="card-body">
                 <h5 class="card-title">Health</h5>
-                <p class="card-text">
-                    Some quick example text to build on the card title and make up the bulk of the
-                    card's content.
-                </p>
-            </div>
-        </div>
-        <div class="card col-4 m-3">
-            <div class="card-body">
-                <h5 class="card-title">Time</h5>
-                <p class="card-text">
-                    Some quick example text to build on the card title and make up the bulk of the
-                    card's content.
-                </p>
+                <?php
+                $date1 = date('Y-m-d');
+                $stmt=$conn->prepare('SELECT deadline FROM projects WHERE Name = ? ');
+                $stmt->bind_param('s', $name);
+                $stmt->execute();
+                $result = $stmt->get_result();
+                $value = $result->fetch_object();
+                $date2 = $value->deadline;
+                require('Modules/datesubstr.php');
+                echo $result . ' days left till deadline';
+
+                ?>
             </div>
         </div>
     </div>
