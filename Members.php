@@ -49,22 +49,7 @@ require ('Components/Navbar.php');
                             <td>' . $row['role'] . '</td>
                             <td>' . $row['team_id'] . '</td>
                             <td>' . $row['location'] . '</td>
-                            <td> <div class="dropdown">
-                              <button
-                                class="btn btn-primary dropdown-toggle"
-                                type="button"
-                                id="dropdownMenuButton"
-                                data-mdb-toggle="dropdown"
-                                aria-expanded="false"
-                              >
-                                Manage
-                              </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                              <li><a class="dropdown-item" href="#">Action</a></li>
-                              <li><a class="dropdown-item" href="#">Another action</a></li>
-                              <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                            </div></td></tr>' ;
+                          </tr>' ;
                 }
                 $conn->close();
             ?>
