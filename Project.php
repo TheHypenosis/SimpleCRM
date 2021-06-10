@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/mdb.min.css" type="text/css">
     <script src="js/mdb.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="css/index.css" type="text/css">
 </head>
 <body>
     
@@ -208,7 +209,6 @@ $project = $_SESSION['project'];
                 $stmt->fetch();
                 $date2 = $deadline;
                 require('Modules/datesubstr.php');
-                echo $result . ' days left till deadline.'; 
                 $res1 = $result;
                 $date1 = $start_date;
                 $date2 = $deadline;
@@ -216,6 +216,8 @@ $project = $_SESSION['project'];
                 $res2 = $result;
                 $perc = (1 - ($res1/$res2))*100;
                 $stmt->close(); 
+                if($perc<'100') {
+                echo substr($res1, 1, 10) . ' days left till deadline.'; 
                 echo   '<div class="progress">
                             <div
                                 class="progress-bar"
@@ -226,6 +228,19 @@ $project = $_SESSION['project'];
                                 aria-valuemax="100"
                             ></div>
                         </div><br>';
+                }else {
+                    echo substr($res1, 1, 10) . ' days past deadline.'; 
+                    echo   '<div class="progress">
+                            <div
+                                class="progress-bar bg-danger"
+                                role="progressbar"
+                                style="width: '.$perc.'%;"
+                                aria-valuenow="10"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                            ></div>
+                        </div><br>';
+                }
                 $stmt=$conn->prepare('SELECT COUNT(finished) FROM tasks WHERE finished>0 AND project_id = ?;');
                 $stmt->bind_param('s', $id);
                 $stmt->execute();
@@ -238,7 +253,11 @@ $project = $_SESSION['project'];
                 $stmt->fetch();
                 $stmt->close();
                 $perc = (1 - ($finished/$all))*100;
-                echo substr($perc, 0, 2) . '% of tasks finished.';
+                if($perc<100) {
+                    echo substr($perc, 0, 2) . '% of tasks finished.';
+                }else {
+                    echo substr($perc, 0, 3) . '% of tasks finished.';
+                }
                 echo   '<div class="progress">
                             <div
                                 class="progress-bar"
