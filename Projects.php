@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="css/mdb.min.css" type="text/css">
     <script src="js/mdb.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
+    <link rel="stylesheet" href="css/index.css" type="text/css">
 </head>
 <body>
     
@@ -25,7 +26,7 @@ require ('Components/Navbar.php');
     </a>
 </div>
 <div class="container-fluid">
-    <table class="table" id="myTable">
+    <table class="table table-light" id="myTable">
         <thead class="table-primary">
         <tr>
             <th onclick="sortTable(0)">Nr.</th>
