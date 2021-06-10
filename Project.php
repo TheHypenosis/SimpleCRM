@@ -201,15 +201,54 @@ $project = $_SESSION['project'];
                 <h5 class="card-title">Health</h5>
                 <?php
                 $date1 = date('Y-m-d');
-                $stmt=$conn->prepare('SELECT deadline FROM projects WHERE Name = ? ');
+                $stmt=$conn->prepare('SELECT start_date, deadline FROM projects WHERE Name = ? ');
                 $stmt->bind_param('s', $name);
                 $stmt->execute();
-                $result = $stmt->get_result();
-                $value = $result->fetch_object();
-                $date2 = $value->deadline;
+                $stmt->bind_result($start_date, $deadline);
+                $stmt->fetch();
+                $date2 = $deadline;
                 require('Modules/datesubstr.php');
-                echo $result . ' days left till deadline';
-
+                echo $result . ' days left till deadline.'; 
+                $res1 = $result;
+                $date1 = $start_date;
+                $date2 = $deadline;
+                require('Modules/datesubstr.php');
+                $res2 = $result;
+                $perc = (1 - ($res1/$res2))*100;
+                $stmt->close(); 
+                echo   '<div class="progress">
+                            <div
+                                class="progress-bar"
+                                role="progressbar"
+                                style="width: '.$perc.'%;"
+                                aria-valuenow="10"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                            ></div>
+                        </div><br>';
+                $stmt=$conn->prepare('SELECT COUNT(finished) FROM tasks WHERE finished>0 AND project_id = ?;');
+                $stmt->bind_param('s', $id);
+                $stmt->execute();
+                $stmt->bind_result($finished);
+                $stmt->fetch();
+                $stmt->close();
+                $stmt=$conn->prepare('SELECT COUNT(ID) FROM tasks WHERE project_id IS NOT NULL');
+                $stmt->execute();
+                $stmt->bind_result($all);
+                $stmt->fetch();
+                $stmt->close();
+                $perc = (1 - ($finished/$all))*100;
+                echo substr($perc, 0, 2) . '% of tasks finished.';
+                echo   '<div class="progress">
+                            <div
+                                class="progress-bar"
+                                role="progressbar"
+                                style="width: '.$perc.'%;"
+                                aria-valuenow="10"
+                                aria-valuemin="0"
+                                aria-valuemax="100"
+                            ></div>
+                        </div><br>';
                 ?>
             </div>
         </div>
