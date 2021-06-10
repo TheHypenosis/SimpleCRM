@@ -18,7 +18,7 @@ $uid = $_SESSION['ID'];
 if(isset($_POST['pname'])){
     $name = $_POST['pname'];
 }
-
+$selected = $_SESSION['page'];
 $desc = $_POST['desc'];
 $null = '';
 switch ($var) {
@@ -27,21 +27,21 @@ switch ($var) {
         $stmt->bind_param('sssss', $ID, $name, $desc, $date, $pid);
         $stmt->execute();
         $stmt->close();
-        header('Location:../Project.php');
+        header('Location:../'.$selected.'.php');
         break;
     case 'Task_List': 
         $stmt=$conn->prepare('INSERT INTO tasks (ID, name, description, created, User_id) VALUES (?, ?, ?, ?, ?)');
         $stmt->bind_param('sssss', $ID, $name, $desc, $date, $uid);
         $stmt->execute();
         $stmt->close();
-        header('Location:../Project.php');
+        header('Location:../'.$selected.'.php');
         break;
     case 'Notes':
         $stmt=$conn->prepare('INSERT INTO notes () VALUES (?, ?, ?, ?)') ;
         $stmt->bind_param('ssss', $ID, $uid, $desc, $date);
         $stmt->execute();
         $stmt->close();
-        header('Location:../Project.php');
+        header('Location:../'.$selected.'.php');
         break;
     default:
         echo 'Error';

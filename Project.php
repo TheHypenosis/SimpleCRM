@@ -17,6 +17,10 @@
     
 <?php
 require ('Components/Navbar.php');
+$url =  "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+$x = pathinfo($url);
+$selected = $x['filename'] ;
+$_SESSION['page'] = $selected;
 ?>
 
 <!-- Main Panel -->
@@ -37,7 +41,7 @@ $project = $_SESSION['project'];
                         $stmt=$conn->prepare('SELECT * FROM projects WHERE name=?');
                         $stmt->bind_param('s', $project);
                         $stmt->execute();
-                        $stmt->bind_result($id, $name, $start, $end, $deadline, $desc, $team_id, $group_id);
+                        $stmt->bind_result($id, $name, $start, $end, $deadline, $desc, $team_id);
                         $stmt->fetch();
                         echo '<p class="card-text">'.$start;
                         if($end>0) {
@@ -241,18 +245,23 @@ $project = $_SESSION['project'];
                             ></div>
                         </div><br>';
                 }
-                $stmt=$conn->prepare('SELECT COUNT(finished) FROM tasks WHERE finished>0 AND project_id = ?;');
+                $stmt=$conn->prepare('SELECT COUNT(ID) FROM tasks WHERE finished>0 AND project_id = ?;');
                 $stmt->bind_param('s', $id);
                 $stmt->execute();
                 $stmt->bind_result($finished);
                 $stmt->fetch();
                 $stmt->close();
-                $stmt=$conn->prepare('SELECT COUNT(ID) FROM tasks WHERE project_id IS NOT NULL');
+                $stmt=$conn->prepare('SELECT COUNT(ID) FROM tasks WHERE project_id = ?');
+                $stmt->bind_param('s', $id);
                 $stmt->execute();
                 $stmt->bind_result($all);
                 $stmt->fetch();
                 $stmt->close();
-                $perc = (1 - ($finished/$all))*100;
+                if($finished>0 && $all>0) {
+                    $perc = ($finished/$all)*100;
+                }else {
+                    $perc = 0;
+                }
                 if($perc<100) {
                     echo substr($perc, 0, 2) . '% of tasks finished.';
                 }else {

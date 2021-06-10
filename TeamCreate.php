@@ -28,13 +28,13 @@ require ('Components/Navbar.php');
             <option value="NULL">None</option>
                 <?php
                     require ('Modules/db.php');
-
-                    $sql = "SELECT Name FROM projects";
-                    $result = $conn->query($sql);
+                    $stmt =$conn->prepare("SELECT Name FROM projects");
+                    $stmt->execute();
+                    $result = $stmt->get_result();
                 while ($row = $result->fetch_assoc()) {
                     echo '<option value = "' . $row['Name'] . '">' . $row['Name'] . '</option>';
                 }
-                
+                    $stmt->close();
                 ?>
         </select>
 
@@ -50,15 +50,14 @@ while($f<'5') {
         <div class="col-4">
             <select class="form-control" name="person'. $f .'">
             <option selected>Choose a person ...</option>';
-            
-                $o = 1;
-                $sql_name = 'SELECT * FROM clients';
-                $result = $conn->query($sql_name);
+                $stmt =$conn->prepare("SELECT * FROM clients");
+                $stmt->execute();
+                $result = $stmt->get_result();
                     while($row =$result->fetch_assoc()) {
                         echo '<option  value="' . $row['ID']  .'">' . $row['name'] . ' ' . $row['surname'] . '</option>';
                         
                     }
-                
+                    $stmt->close();
             echo '</select>
         </div>
         <div class="col-4"><select name="Role'.$f.'" class="form-control">

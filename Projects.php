@@ -41,12 +41,10 @@ require ('Components/Navbar.php');
         <tbody>
             <?php
                 require('Modules/db.php');
-                $sql = "Select * FROM projects";
-                
+                $stmt =$conn->prepare("SELECT * FROM projects");
+                $stmt->execute();
                 $i = '1';
-
-                $result = $conn->query($sql);
-
+                $result = $stmt->get_result();
                 while ($row = $result->fetch_assoc()) {
                     echo '<tr><td>' . $i++ . '</td>
                           <td>' . $row['ID'] . '</td>
@@ -58,7 +56,7 @@ require ('Components/Navbar.php');
                           <td>' . $row['end_date'] . '</td>
                           <td>' . $row['team_id'] . '</td></tr>';
                 }
-                $conn->close();
+                $stmt->close();
             ?>
         </tbody>
     </table>

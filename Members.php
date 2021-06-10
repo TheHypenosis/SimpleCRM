@@ -36,12 +36,10 @@ require ('Components/Navbar.php');
         <tbody>
             <?php
                 require('Modules/db.php');
-                $sql = "Select * FROM clients";
-                
+                $stmt =$conn->prepare("SELECT * FROM clients");
+                $stmt->execute();
+                $result = $stmt->get_result();
                 $i = '1';
-
-                $result = $conn->query($sql);
-
                 while ($row = $result->fetch_assoc()) {
                     echo '<tr>
                             <td>' . $i++ . '</td>
@@ -52,7 +50,7 @@ require ('Components/Navbar.php');
                             <td>' . $row['location'] . '</td>
                           </tr>' ;
                 }
-                $conn->close();
+                $stmt->close();
             ?>
         </tbody>
     </table>

@@ -17,7 +17,12 @@
     
 <?php
 require ('Components/Navbar.php');
-require ('Modules/db.php')
+require ('Modules/db.php');
+$url =  "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+$x = pathinfo($url);
+$selected = $x['filename'] ;
+$_SESSION['page'] = $selected;
+$uid = $_SESSION['ID'];
 ?>
 
 <!-- Main Panel -->
@@ -47,18 +52,23 @@ require ('Modules/db.php')
                     <td>' .$i. '</td>
                     <td>' .$row['name']. '</td>
                     <td>';
-                    $stmt=$conn->prepare('SELECT COUNT(finished) FROM tasks WHERE finished>0 AND project_id = ?;');
+                    $stmt=$conn->prepare('SELECT COUNT(ID) FROM tasks WHERE finished>0 AND project_id = ?;');
                     $stmt->bind_param('s', $pid);
                     $stmt->execute();
                     $stmt->bind_result($finished);
                     $stmt->fetch();
                     $stmt->close();
-                    $stmt=$conn->prepare('SELECT COUNT(ID) FROM tasks WHERE project_id IS NOT NULL');
+                    $stmt=$conn->prepare('SELECT COUNT(ID) FROM tasks WHERE project_id = ?');
+                    $stmt->bind_param('s', $pid);
                     $stmt->execute();
                     $stmt->bind_result($all);
                     $stmt->fetch();
                     $stmt->close();
-                    $perc = (1 - ($finished/$all))*100;
+                    if($finished>0) {
+                        $perc = ($finished/$all)*100;
+                    }else {
+                        $perc = 0;
+                    }
                     if($perc<100) {
                         echo substr($perc, 0, 2) . '% of tasks finished.';
                     }else {
@@ -134,7 +144,7 @@ require ('Modules/db.php')
                 <h5 class="card-title col-10">Task List</h5><form class="col-2" method="POST" action="Create.php"><button type="submit" name="Add" value="Task_List" class="btn btn-secondary btn-sm"><i class="fas fa-plus"></i></i></button></form></div>
                 <?php
                     $stmt=$conn->prepare('SELECT * FROM tasks WHERE User_id = ?');
-                    $stmt->bind_param('s', $_SESSION['ID']);
+                    $stmt->bind_param('s', $uid);
                     $stmt->execute();
                     $result = $stmt->get_result();
                     echo '<div class="accordion accordion-flush" id="Tasklist">';
@@ -167,7 +177,7 @@ require ('Modules/db.php')
                                 </div>
                                 </div>
                             </div>
-                            <form method="POST" action="Project.php" class="col-1 mt-3">
+                            <form method="POST" action="Dashboard.php" class="col-1 mt-3">
                                 <button type="submit" class="btn btn-outline-danger btn-floating btn-sm" name="deltask" value="'. $row['ID'] .' ">
                                     <i class="fas fa-minus"></i>
                                 </button>
@@ -197,7 +207,7 @@ require ('Modules/db.php')
                 <h5 class="card-title col-8">Notes</h5><form class="col-3" method="POST" action="Create.php"><button type="submit" name="Add" value="Notes" class="btn btn-secondary btn-sm"><i class="fas fa-plus"></i></button></form></div>
                 <?php
                     $stmt=$conn->prepare('SELECT * FROM notes WHERE user_id = ?');
-                    $stmt->bind_param('s', $_SESSION['ID']);
+                    $stmt->bind_param('s', $uid);
                     $stmt->execute();
                     $result = $stmt->get_result();
                     echo '<ul class="list-group list-group-flush">';
@@ -205,7 +215,7 @@ require ('Modules/db.php')
                        
                             echo '<li class="list-group-item">
                             '. $row['note'].
-                            '<form method="POST" action="Project.php" class="col-1 mt-3">
+                            '<form method="POST" action="Dashboard.php" class="col-1 mt-3">
                             <button type="submit" class="btn btn-outline-danger btn-floating btn-sm" name="delnote" value="'. $row['ID'] .' ">
                                 <i class="fas fa-minus"></i>
                             </button>

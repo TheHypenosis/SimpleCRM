@@ -32,24 +32,21 @@ require ('Components/Navbar.php');
             <th onclick="sortTable(0)">Nr.</th>
             <th onclick="sortTable(1)">ID</th>
             <th onclick="sortTable(2)">Project Name</th>
-            <th onclick="sortTable(3)">Project Start Date</th>
-            <th onclick="sortTable(4)">Team</th>  
+            <th onclick="sortTable(3)">Project Start Date</th> 
             <th> <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for project names.."></th>       
         </tr>  
         </thead>
         <tbody>
             <?php
                 require('Modules/db.php');
-                $sql = "Select * FROM teams";
-                
+                $stmt =$conn->prepare("Select * FROM teams");
+                $stmt->execute();
                 $i = '1';
-
-                $result = $conn->query($sql);
-
+                $result = $stmt->get_result();
                 while ($row = $result->fetch_assoc()) {
-                    echo '<tr><td>' . $i++ . '</td><td>' . $row['ID'] . '</td><td> ' . $row['project_name'] . '</td><td>' . $row['project_start'] . '</td><td>' . $row['group_id'] . '</td></tr>';
+                    echo '<tr><td>' . $i++ . '</td><td>' . $row['ID'] . '</td><td> ' . $row['project_name'] . '</td><td>' . $row['project_start'] . '</td></tr>';
                 }
-                $conn->close();
+                $stmt->close();
             ?>
         </tbody>
     </table>

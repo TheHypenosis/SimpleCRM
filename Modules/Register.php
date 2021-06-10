@@ -1,4 +1,5 @@
 <?php
+session_start();
 if(isset($_POST['name'])) {
     $name= $_POST['name'];
 }
@@ -20,14 +21,16 @@ require('db.php');
 $ID =substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstvwxyz', 36)), 0, 10);
 
 
-$sql= "INSERT INTO clients (ID, name, surname, Email, phone_number, password) VALUES ('$ID', '$name', '$surname', '$email', '$phone', '$passw')";
+$stmt=$conn->prepare ("INSERT INTO clients (ID, name, surname, Email, phone_number, password) VALUES (?, ?, ?, ?, ?, ?)");
+$stmt->bind_param('ssssss', $ID, $name, $surname, $email, $phone, $passw);
 
-if ($conn->query($sql)===TRUE) {
+if ($stmt->execute()) {
+    $_SESSION['ID'] = $ID;
     header('Location:../Dashboard.php');
-}else{
-    echo 'Error ' . $sql . '<br>' . $conn->error;
+} else {
+   echo $stmt->error;
 }
-
+$stmt->close();
 $conn->close();
 
 

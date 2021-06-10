@@ -20,13 +20,17 @@ $ID =substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstvwxyz', 36)), 
 $stmt = $conn->prepare('SELECT start_date FROM projects WHERE name= ?');
 $stmt->bind_param('s', $project);
 $stmt->execute();
-$result  = $stmt->get_result();
-$value = $result->fetch_object();
-
-$sql_team = "INSERT INTO teams(ID, project_name, project_start) VALUES ('$ID', '$project', '$value->start_date');";
-echo $ID, $project, $value->start_date;
-$conn->query($sql_team);
-
+$stmt->bind_result($start_date);
+$stmt->fetch();
+$stmt->close();
+$stmt = $conn->prepare("INSERT INTO teams(ID, project_name, project_start) VALUES (?, ?, ?);");
+$stmt->bind_param('sss', $ID, $project, $start_date);
+$stmt->execute();
+$stmt->close();
+$stmt=$conn->prepare(' UPDATE projects SET team_id=? WHERE name=?');
+$stmt->bind_param('ss', $ID, $project);
+$stmt->execute();
+$stmt->close();
 $f=0;
 while($f<5) {
     switch($f) {

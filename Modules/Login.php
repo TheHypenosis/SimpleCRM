@@ -13,7 +13,7 @@ $stmt->execute();
 $stmt->bind_result($id);
 $stmt->fetch();
 if(isset($id)) {
-    $_SESSION['ID'] = $row['ID'];
+    $_SESSION['ID'] = $id;
     header('Location:../Dashboard.php');
 }else {
     header('Location:../Login.html');
