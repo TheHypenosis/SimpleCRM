@@ -1,7 +1,7 @@
 <?php
+//Starting the session
     session_start();
 ?>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,18 +14,20 @@
     <link rel="stylesheet" href="css/index.css" type="text/css">
 </head>
 <body>
-    
 <?php
+//Loading navbar from Navbar.php
 require ('Components/Navbar.php');
 ?>
 
 <!-- Main Panel -->
 <div class="container-fluid">
+    <!-- Button redirecting to Teamcreate.php - to create a new team. -->
     <a href="TeamCreate.php">
         <button type="button" class="btn btn-secondary mb-3">Add Team</button>
     </a>
 </div>
 <div class="container-fluid">
+<!-- Creating a table for the output of teams -->
     <table class="table table-light" id="myTable">
         <thead class="table-primary">
         <tr>
@@ -33,16 +35,20 @@ require ('Components/Navbar.php');
             <th onclick="sortTable(1)">ID</th>
             <th onclick="sortTable(2)">Project Name</th>
             <th onclick="sortTable(3)">Project Start Date</th> 
+            <!-- Search names from outputed members -->
             <th> <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for project names.."></th>       
         </tr>  
         </thead>
         <tbody>
             <?php
-                require('Modules/db.php');
+              //Connection to the database
+              require('Modules/db.php');
+                //SQL Query responsible for Selecting everything from teams table
                 $stmt =$conn->prepare("Select * FROM teams");
                 $stmt->execute();
                 $i = '1';
                 $result = $stmt->get_result();
+                //Fetching query results in table rows and cells
                 while ($row = $result->fetch_assoc()) {
                     echo '<tr><td>' . $i++ . '</td><td>' . $row['ID'] . '</td><td> ' . $row['project_name'] . '</td><td>' . $row['project_start'] . '</td></tr>';
                 }
@@ -139,7 +145,5 @@ function myFunction() {
     }
   }
 </script>
-
-<!-- <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
 </body>
 </html>

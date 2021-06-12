@@ -1,7 +1,7 @@
 <?php
+//Starting the session
     session_start();
 ?>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,13 +14,13 @@
     <link rel="stylesheet" href="css/index.css" type="text/css">
 </head>
 <body>
-    
 <?php
+//Loading navbar from Navbar.php
 require ('Components/Navbar.php');
 ?>
-
 <!-- Main Panel -->
 <div class="container-fluid">
+<!-- Creating a table for the output of members -->
     <table class="table table-light" id="myTable">
         <thead class="table-primary">
         <tr>
@@ -29,17 +29,21 @@ require ('Components/Navbar.php');
             <th onclick="sortTable(2)">Email</th>
             <th onclick="sortTable(3)">Position</th>
             <th onclick="sortTable(4)">Team</th>
-            <th onclick="sortTable(5)">Location</th>     
+            <th onclick="sortTable(5)">Location</th>  
+            <!-- Search names from outputed members -->
             <th> <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.."></th>       
         </tr>  
         </thead>
         <tbody>
             <?php
-                require('Modules/db.php');
+              //Connection to the database
+              require('Modules/db.php');
+                //SQL Query responsible for Selecting everything from clients table
                 $stmt =$conn->prepare("SELECT * FROM clients");
                 $stmt->execute();
                 $result = $stmt->get_result();
                 $i = '1';
+                //Fetching query results in table rows and cells
                 while ($row = $result->fetch_assoc()) {
                     echo '<tr>
                             <td>' . $i++ . '</td>
@@ -144,6 +148,5 @@ function sortTable(n) {
 //Sort by
 </script>
 <!-- Main Panel -->
-<!-- <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
 </body>
 </html>

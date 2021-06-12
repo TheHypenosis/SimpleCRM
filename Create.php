@@ -1,7 +1,7 @@
 <?php
+//Starting the session
     session_start();
 ?>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,15 +14,16 @@
     <link rel="stylesheet" href="css/index.css" type="text/css">
 </head>
 <body>
-    
 <?php
+//Loading navbar from Navbar.php
 require ('Components/Navbar.php');
 ?>
-
 <!-- Main Panel -->
 <div class="container-fluid">
     <form action="Modules/PAdd.php" method="POST">
     <?php
+    //If the button clicked was in Notes card, echo the textarea
+    //If the button clicked was something else, echo the text input and text area
         if($_POST['Add'] === 'Notes') {
         echo '<textarea class="form-control" id="textAreaExample" rows="4" name="desc"></textarea>
         <label class="form-label" for="textAreaExample">Note</label><br>
@@ -33,8 +34,10 @@ require ('Components/Navbar.php');
         <textarea class="form-control" id="textAreaExample" rows="4" name="desc"></textarea>
         <label class="form-label" for="textAreaExample">Description</label><br>';
         echo '<button type="submit" class="btn btn-secondary" name="Add" value="';
+        //If the button clicked was in the Tasks card, set the submit value to Tasks 
             if ($_POST['Add'] === 'Tasks') {
                 echo 'Tasks';
+        //If the button clicked was in the Task_List card, set the submit value to Task_List 
             }elseif($_POST['Add'] === 'Task_List') {
                 echo 'Task_List';
             }else{

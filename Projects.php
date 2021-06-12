@@ -1,7 +1,7 @@
 <?php
+//Starting the session
     session_start();
 ?>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,11 +14,12 @@
     <link rel="stylesheet" href="css/index.css" type="text/css">
 </head>
 <body>
-    
 <?php
+//Loading navbar from Navbar.php
 require ('Components/Navbar.php');
+//Connection to the database
+require('Modules/db.php');
 ?>
-
 <!-- Main Panel -->
 <div class="container-fluid">
     <a href="ProjectCreate.php">
@@ -28,6 +29,7 @@ require ('Components/Navbar.php');
 <div class="container-fluid">
     <table class="table table-light" id="myTable">
         <thead class="table-primary">
+        <!-- Table head that sorts by the column onclick -->
         <tr>
             <th onclick="sortTable(0)">Nr.</th>
             <th onclick="sortTable(1)">ID</th>
@@ -40,18 +42,22 @@ require ('Components/Navbar.php');
         </thead>
         <tbody>
             <?php
-                require('Modules/db.php');
+            //SQL Query responsible for Selecting everything from projects
                 $stmt =$conn->prepare("SELECT * FROM projects");
                 $stmt->execute();
                 $i = '1';
                 $result = $stmt->get_result();
+                //Fetching query results in table rows and cells
                 while ($row = $result->fetch_assoc()) {
                     echo '<tr><td>' . $i++ . '</td>
                           <td>' . $row['ID'] . '</td>
-                          <td>
+                          <td>';
+                          //Buton that redirects to Project.php
+                          echo '
                             <form action="Project.php" method="POST">
-                              <button class="btn btn-link btn-outline-info" type="submit" name="project" value="'.$row['Name'].'">' . $row['Name'] . '</button>
-                            </form></td>
+                              <button class="btn btn-link btn-outline-info" type="submit" name="project" value="' . $row['Name'] . '">' . $row['Name'] . '</button>
+                            </form>
+                          </td>
                           <td>' . $row['start_date'] . '</td>
                           <td>' . $row['end_date'] . '</td>
                           <td>' . $row['team_id'] . '</td></tr>';
@@ -150,7 +156,5 @@ function myFunction() {
     }
   }
 </script>
-
-<!-- <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
 </body>
 </html>

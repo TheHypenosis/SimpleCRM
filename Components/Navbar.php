@@ -1,4 +1,5 @@
 <?php
+//Getting the name of the page and seting that to the $selected variable
 $url =  "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
 $x = pathinfo($url);
 $selected = $x['filename'] ;
@@ -8,11 +9,14 @@ $selected = $x['filename'] ;
 <!-- Left Side -->
 <nav class="navbar navbar-light navbar-expand-lg bg-light m-3 sticky-top">
   <div class="container-fluid">
+    <!-- Logo -->
     <a class="navbar-brand" href="Dashboard.php">
       <img
         src="img/project.png" height="30";
       />
     </a>
+    <!-- Navbar Links -->
+    <!-- Sets the selected link to active class -->
     <ul class="navbar-nav me-auto">
         <li class="nav-item">
           <a class="nav-link <?php if ($selected == "Dashboard") echo 'active'; ?>" aria-current="page" href="Dashboard.php">Dashboard</a>
@@ -29,6 +33,7 @@ $selected = $x['filename'] ;
     </ul>
 <!-- Right Side -->
     <ul class="navbar-nav ms-auto">
+      <!-- Notification Bell -->
       <li class="nav-item dropdown">
         <a
           class="nav-link dropdown-toggle hidden-arrow"
@@ -56,6 +61,7 @@ $selected = $x['filename'] ;
           </li>
         </ul>
       </li>
+      <!-- Account dropdown -->
       <li class="nav-item dropdown">
         <a
           class="nav-link dropdown-toggle d-flex align-items-center"

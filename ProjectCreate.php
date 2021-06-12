@@ -1,7 +1,7 @@
 <?php
+//Starting the session
     session_start();
 ?>
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,12 +14,12 @@
     <link rel="stylesheet" href="css/index.css" type="text/css">
 </head>
 <body>
-    
 <?php
+//Loading navbar from Navbar.php
 require ('Components/Navbar.php');
 ?>
-
 <!-- Main Panel -->
+<!-- Form for creating projects -->
 <div class="container-fluid">
     <form action="Modules/Pcreate.php" method="POST">
         <input type="text" id="form1" class="form-control" name="pname"/>
@@ -33,6 +33,5 @@ require ('Components/Navbar.php');
 </div>
 
 <!-- Main Panel -->
-<!-- <div>Icons made by <a href="https://www.freepik.com" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div> -->
 </body>
 </html>
