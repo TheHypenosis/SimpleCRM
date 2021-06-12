@@ -12,7 +12,7 @@ $selected = $x['filename'] ;
     <!-- Logo -->
     <a class="navbar-brand" href="Dashboard.php">
       <img
-        src="img/project.png" height="30";
+        src="../img/project.png" height="30";
       />
     </a>
     <!-- Navbar Links -->
@@ -81,7 +81,7 @@ $selected = $x['filename'] ;
               <a class="dropdown-item" href="#">Settings</a>
             </li>
             <li>
-              <a class="dropdown-item" href="../spm/Modules/Logout.php">Logout</a>
+              <a class="dropdown-item" href="../Modules/Logout.php">Logout</a>
             </li>
           </ul>
       </li>

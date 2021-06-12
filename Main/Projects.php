@@ -8,49 +8,59 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/mdb.min.css" type="text/css">
-    <script src="js/mdb.min.js"></script>
+    <link rel="stylesheet" href="../css/mdb.min.css" type="text/css">
+    <script src="../js/mdb.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-    <link rel="stylesheet" href="css/index.css" type="text/css">
+    <link rel="stylesheet" href="../css/index.css" type="text/css">
 </head>
 <body>
 <?php
 //Loading navbar from Navbar.php
-require ('Components/Navbar.php');
+require ('../Components/Navbar.php');
+//Connection to the database
+require('../Modules/db.php');
 ?>
-
 <!-- Main Panel -->
 <div class="container-fluid">
-    <!-- Button redirecting to Teamcreate.php - to create a new team. -->
-    <a href="TeamCreate.php">
-        <button type="button" class="btn btn-secondary mb-3">Add Team</button>
+    <a href="ProjectCreate.php">
+        <button type="button" class="btn btn-secondary mb-3">Add Project</button>
     </a>
 </div>
 <div class="container-fluid">
-<!-- Creating a table for the output of teams -->
     <table class="table table-light" id="myTable">
         <thead class="table-primary">
+        <!-- Table head that sorts by the column onclick -->
         <tr>
             <th onclick="sortTable(0)">Nr.</th>
             <th onclick="sortTable(1)">ID</th>
             <th onclick="sortTable(2)">Project Name</th>
-            <th onclick="sortTable(3)">Project Start Date</th> 
-            <!-- Search names from outputed members -->
+            <th onclick="sortTable(3)">Project Start Date</th>
+            <th onclick="sortTable(4)">Project End Date</th>
+            <th onclick="sortTable(5)">Team</th>  
             <th> <input class="form-control" type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for project names.."></th>       
         </tr>  
         </thead>
         <tbody>
             <?php
-              //Connection to the database
-              require('Modules/db.php');
-                //SQL Query responsible for Selecting everything from teams table
-                $stmt =$conn->prepare("Select * FROM teams");
+            //SQL Query responsible for Selecting everything from projects
+                $stmt =$conn->prepare("SELECT * FROM projects");
                 $stmt->execute();
                 $i = '1';
                 $result = $stmt->get_result();
                 //Fetching query results in table rows and cells
                 while ($row = $result->fetch_assoc()) {
-                    echo '<tr><td>' . $i++ . '</td><td>' . $row['ID'] . '</td><td> ' . $row['project_name'] . '</td><td>' . $row['project_start'] . '</td></tr>';
+                    echo '<tr><td>' . $i++ . '</td>
+                          <td>' . $row['ID'] . '</td>
+                          <td>';
+                          //Buton that redirects to Project.php
+                          echo '
+                            <form action="Project.php" method="POST">
+                              <button class="btn btn-link btn-outline-info" type="submit" name="project" value="' . $row['Name'] . '">' . $row['Name'] . '</button>
+                            </form>
+                          </td>
+                          <td>' . $row['start_date'] . '</td>
+                          <td>' . $row['end_date'] . '</td>
+                          <td>' . $row['team_id'] . '</td></tr>';
                 }
                 $stmt->close();
             ?>
@@ -64,6 +74,7 @@ require ('Components/Navbar.php');
 <!-- Script -->
 
 <script>
+
 // Search Bar
 
 function myFunction() {

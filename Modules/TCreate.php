@@ -79,6 +79,6 @@ while($f<5) {
     }
 }
 //Redirect to Teams.php
-header('Location:../Teams.php');
+header('Location:../Main/Teams.php');
 $conn->close();
 ?>

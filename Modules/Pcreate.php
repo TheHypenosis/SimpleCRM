@@ -14,7 +14,7 @@ $stmt = $conn->prepare("INSERT INTO projects(ID, Name, start_date, deadline, Des
 $stmt->bind_param('sssss', $ID, $name, $date, $deadline, $desc);
 $stmt->execute();
 //Redirect to Projects.php
-header('Location:../Projects.php');
+header('Location:../Main/Projects.php');
 
 $conn->close();
 ?>

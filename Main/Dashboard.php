@@ -8,17 +8,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="css/mdb.min.css" type="text/css">
-    <script src="js/mdb.min.js"></script>
+    <link rel="stylesheet" href="../css/mdb.min.css" type="text/css">
+    <script src="../js/mdb.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-    <link rel="stylesheet" href="css/index.css" type="text/css">
+    <link rel="stylesheet" href="../css/index.css" type="text/css">
 </head>
 <body>
 <?php
 //Loading navbar from Navbar.php
-require ('Components/Navbar.php');
+require ('../Components/Navbar.php');
 //Connection to the database
-require ('Modules/db.php');
+require ('../Modules/db.php');
 //Getting the name of the page and seting that to the SESSION->page variable
 $url =  "//{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
 $x = pathinfo($url);

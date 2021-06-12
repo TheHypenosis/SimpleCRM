@@ -38,7 +38,7 @@ switch ($var) {
         $stmt->execute();
         $stmt->close();
         //Redirect to the page name from where the Create button was clicked
-        header('Location:../'.$selected.'.php');
+        header('Location:../Main/'.$selected.'.php');
         break;
     case 'Task_List': 
         //SQL Query responsible for insterting a user task into the task table
@@ -47,7 +47,7 @@ switch ($var) {
         $stmt->execute();
         $stmt->close();
         //Redirect to the page name from where the Create button was clicked
-        header('Location:../'.$selected.'.php');
+        header('Location:../Main/'.$selected.'.php');
         break;
     case 'Notes':
         //SQL Query responsible for insterting a note into the notes table
@@ -56,7 +56,7 @@ switch ($var) {
         $stmt->execute();
         $stmt->close();
         //Redirect to the page name from where the Create button was clicked
-        header('Location:../'.$selected.'.php');
+        header('Location:../Main/'.$selected.'.php');
         break;
     default:
         echo 'Error';

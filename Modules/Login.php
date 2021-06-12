@@ -15,9 +15,9 @@ $stmt->fetch();
 //Checking if the output of the SQL query is set, if yes, set SESSION->ID and redirect to Dashboard.php, if not redirect back to Login.html
 if(isset($id)) {
     $_SESSION['ID'] = $id;
-    header('Location:../Dashboard.php');
+    header('Location:../Main/Dashboard.php');
 }else {
-    header('Location:../Login.html');
+    header('Location:../Index.html');
 }
 //Close the connection
 $conn->close();

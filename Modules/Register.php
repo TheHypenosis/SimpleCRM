@@ -27,7 +27,7 @@ $stmt->bind_param('ssssss', $ID, $name, $surname, $email, $phone, $passw);
 //Checking if the statement was executed, if yes assign the SESSION->ID and redirect to Dashboard.php, if not print error
 if ($stmt->execute()) {
     $_SESSION['ID'] = $ID;
-    header('Location:../Dashboard.php');
+    header('Location:../Main/Dashboard.php');
 } else {
    echo $stmt->error;
 }
