@@ -61,7 +61,7 @@ $uid = $_SESSION['ID'];
                     <td>' .$row['name']. '</td>
                     <td>';            
                     //SQL Query responsible for counting the amount of rows of finished tasks
-                    $stmt=$conn->prepare('SELECT COUNT(ID) FROM tasks WHERE finished>0 AND project_id = ?;');
+                    $stmt=$conn->prepare('SELECT COUNT(ID) FROM tasks WHERE finished IS NOT NULL AND project_id = ?;');
                     $stmt->bind_param('s', $pid);
                     $stmt->execute();
                     $stmt->bind_result($finished);
@@ -135,8 +135,13 @@ $uid = $_SESSION['ID'];
                         $stmt->fetch();
                         $stmt->close();
                         //Calculate the percentage of tasks not completed and completed
-                        $ongoing = ($not_done/$query_full)*100;
-                        $completed = ($done/$query_full)*100;
+                        if($query_full>0) {
+                            $ongoing = ($not_done/$query_full)*100;
+                            $completed = ($done/$query_full)*100;
+                        }else {
+                            $ongoing = 0;
+                            $completed = 0;
+                        }
                         //Progress bar with $perc as indicator to how much width does the progress bar have
                         echo '<div class="progress">
                         <div
@@ -320,12 +325,18 @@ $uid = $_SESSION['ID'];
                 $stmt->bind_result($overdue_projects);
                 $stmt->fetch();
                 $stmt->close();
-                //Count percentage of ongoing projects
-                $ongoingp = ($ongoing_projects/$all_projects)*100;
-                //Count percentage of completed projects
-                $completedp = ($completed_projects/$all_projects)*100;
-                //Count percentage of overdue projects
-                $overduep = ($overdue_projects/$all_projects)*100;
+                if($all_projects>0) {
+                    //Count percentage of ongoing projects
+                    $ongoingp = ($ongoing_projects/$all_projects)*100;
+                    //Count percentage of completed projects
+                    $completedp = ($completed_projects/$all_projects)*100;
+                    //Count percentage of overdue projects
+                    $overduep = ($overdue_projects/$all_projects)*100;
+                }else {
+                    $ongoingp = 0;
+                    $completedp = 0;
+                    $overduep = 0;
+                }
                 //Progress bars with variables as indicator to how much width does the progress bar have
                 echo '<div class="progress">
                 <div
