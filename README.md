@@ -1,6 +1,6 @@
 SPM - Simple Project Managment
 ==============================
-`A Simple project managment website created with PHP 7 and Bootstrap 4.`
+`A Simple project managment website. It tracks down the specific projects progress and stores their tasks. The website is also capable of showing the progress of all the created projects.`
 	
 Bug / Feature Request
 ---------------------
@@ -21,3 +21,7 @@ To-do
 * Add a acordion to the teams page which will show team members.
 * Add a completed button to team tasks.
 * Add prevention of choosing the same person in teams creating page.
+
+Sources
+-------
+The logo image was taken from[Flaticon](https://www.flaticon.com/) and where made by [Freepik](https://www.freepik.com).
