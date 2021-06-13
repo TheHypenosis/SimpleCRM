@@ -24,4 +24,4 @@ To-do
 
 Sources
 -------
-The logo image was taken from[Flaticon](https://www.flaticon.com/) and where made by [Freepik](https://www.freepik.com).
+The logo image was taken from [Flaticon](https://www.flaticon.com/) and where made by [Freepik](https://www.freepik.com).
