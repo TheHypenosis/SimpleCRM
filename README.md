@@ -8,7 +8,7 @@ If you find a bug (the website couldn't handle the query and / or gave undesired
   
 If you'd like to request a new function, feel free to do so by opening an issue [here](https://github.com/TheHypenosis/SimpleProjectManager/issues/new). Please include sample queries and their corresponding results.  
 
-### Built with
+## Built with
 
 * PHP 7 - A server side scripting language that is embedded in HTML.
 * Bootstrap 5 - Extensive list of components and Bundled Javascript plugins.  
@@ -29,7 +29,7 @@ SPM is available to use with XAMPP.
 Now you can go to http://localhost/Foldername and start using SPM!
 
 
-### To-do
+## To-do
 
 * User control panel/management.
 * Work on better password protection.
@@ -38,6 +38,6 @@ Now you can go to http://localhost/Foldername and start using SPM!
 * Add a completed button to team tasks.
 * Add prevention of choosing the same person in teams creating page.
 
-### Sources
+## Sources
 
 The logo image was taken from [Flaticon](https://www.flaticon.com/) and where made by [Freepik](https://www.freepik.com).
