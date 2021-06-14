@@ -1,4 +1,4 @@
-SPM - Simple Project Managment
+# SPM - Simple Project Managment
 ==============================
 `A Simple project managment website. It tracks down the specific projects progress and stores their tasks. The website is also capable of showing the progress of all the created projects.`
 	
@@ -12,6 +12,23 @@ Built with
 ----------
 * PHP 7 - A server side scripting language that is embedded in HTML.
 * Bootstrap 5 - Extensive list of components and Bundled Javascript plugins.  
+
+Installation
+===============
+
+Windows
+-----------
+SPM is available to use with XAMPP.
+1. Download the repository
+2. Extract the zip
+3. Move the unpacked folder into XAMPP/htdocs
+4. Start xampp-control.exe
+5. Start Apache & MySQL in teh opened ControlCenter
+6. Open the phpmyadmin interface
+7. Create a spm databse and export spm.sql into it
+
+Now you can go to http://localhost/Foldername and start using SPM!
+
 
 To-do
 -----
