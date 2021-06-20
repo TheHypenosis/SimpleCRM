@@ -173,7 +173,7 @@ $project = $_SESSION['project'];
                             //Button responsible for deleting the user task that is next to it
                             echo '
                             <form method="POST" action="Project.php" class="col-1 mt-3">
-                                <button type="submit" class="btn btn-outline-danger btn-floating btn-sm" name="deltask" value="'. $row['ID'] .' ">
+                                <button type="submit" class="btn btn-outline-danger btn-floating btn-sm" name="deltask" value="'. $row['ID'] .'">
                                     <i class="fas fa-minus"></i>
                                 </button>
                             </form></div>';
@@ -222,7 +222,7 @@ $project = $_SESSION['project'];
                             '. $row['note'];
                             //Button responsible for deleting the user note that is next to it
                             echo '<form method="POST" action="Project.php" class="col-1 mt-3">
-                            <button type="submit" class="btn btn-outline-danger btn-floating btn-sm" name="delnote" value="'. $row['ID'] .' ">
+                            <button type="submit" class="btn btn-outline-danger btn-floating btn-sm" name="delnote" value="'. $row['ID'] .'">
                                 <i class="fas fa-minus"></i>
                             </button>
                         </form>
