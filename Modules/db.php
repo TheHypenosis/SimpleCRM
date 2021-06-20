@@ -1,6 +1,6 @@
 <?php
 //Assign mysql server name
-$servername = 'localhost';
+$servername = 'db';
 //Assign mysql username
 $username = 'root';
 //Assign mysql usernames password

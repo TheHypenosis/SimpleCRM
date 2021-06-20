@@ -1,0 +1,29 @@
+# Use root/example as user/password credentials
+version: '3.9'
+
+services:
+
+  web:
+    container_name: php_web
+    depends_on:
+      - db
+    ports:
+      - "8100:80"
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/var/www/html/
+
+  db:
+    container_name: mysql
+    image: mysql:8.0
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment:
+        MYSQL_DATABASE: spm 
+        MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+
+
