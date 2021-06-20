@@ -17,16 +17,14 @@ If you'd like to request a new function, feel free to do so by opening an issue 
 
 ### Windows
 
-SPM is available to use with XAMPP.
+SPM is available to use with Docker.
 1. Download the repository
 2. Extract the zip
-3. Move the unpacked folder into XAMPP/htdocs
-4. Start xampp-control.exe
-5. Start Apache & MySQL in teh opened ControlCenter
-6. Open the phpmyadmin interface
-7. Create a spm databse and export spm.sql into it
+3. Open the command-line and go to the repository directory
+4. Inside the repository paste ' docker compose up '
+5. Now you can go to lolcahost:8100 in your browser and register into SPM!
 
-Now you can go to http://localhost/Foldername and start using SPM!
+! After closing the docker container, the mysql data (accounts, projects, tasks, notes and teams) will be reset !
 
 
 ## To-do
