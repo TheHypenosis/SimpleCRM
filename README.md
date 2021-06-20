@@ -21,7 +21,7 @@ SPM is available to use with Docker.
 1. Download the repository
 2. Extract the zip
 3. Open the command-line and go to the repository directory
-4. Inside the repository paste ' docker compose up '
+4. Inside the repository paste ` docker compose up `
 5. Now you can go to lolcahost:8100 in your browser and register into SPM!
 
 ! After closing the docker container, the mysql data (accounts, projects, tasks, notes and teams) will be reset !
